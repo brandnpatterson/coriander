@@ -8,8 +8,6 @@ A simple form validation library
 
 ## Example
 
-validation via regex
-
 ```
 <input
   class="form-input"
@@ -27,13 +25,9 @@ validation via regex
 <script type="text/javascript">
   var $form = document.querySelector('.form');
 
-  $form.coriander({
-    onChange: true
-  });
+  $form.coriander();
 </script>
 ```
-
-add data attributes to the inputs of your form
 
 ## Built With
 
