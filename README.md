@@ -2,6 +2,39 @@
 
 A simple form validation library
 
+## Version
+
+1.0.1
+
+## Example
+
+validation via regex
+
+```
+<input
+  class="form-input"
+  type="text"
+  id="name"
+  name="name"
+  data-error="Please enter letters only"
+  data-placeholder="true"
+  data-regex="[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+  data-required="true"
+/>
+```
+
+```
+<script type="text/javascript">
+  var $form = document.querySelector('.form');
+
+  $form.coriander({
+    onChange: true
+  });
+</script>
+```
+
+add data attributes to the inputs of your form
+
 ## Built With
 
 - [Gulp](https://gulpjs.com/) - Task runner

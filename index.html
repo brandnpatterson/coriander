@@ -23,8 +23,6 @@
               id="name"
               name="name"
               data-error="Please enter letters only"
-              data-placeholder="true"
-              data-regex="[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$"
               data-required="true"
             />
           </div>
@@ -127,9 +125,7 @@
       var $form = document.querySelector('.form');
 
       $date.append(new Date().getFullYear());
-      $form.Coriander({
-        onChange: true
-      });
+      $form.coriander();
     </script>
   </body>
 </html>

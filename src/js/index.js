@@ -40,10 +40,6 @@ var forEach = require('./util/forEach');
             window.scrollTo(0, 0);
           }
         });
-
-        form.addEventListener('change', function() {
-          _this.validate();
-        });
       },
 
       setup: function() {
@@ -80,17 +76,28 @@ var forEach = require('./util/forEach');
         var _this = this;
 
         forEach(this.$inputs, function(input) {
+          var dataset = input.dataset;
           var error = input.parentNode.querySelector('.coriander-error');
           var match = input.value.match(input.dataset.regex);
 
-          if (input.dataset.placeholder) {
-            if (match) {
+          // @todo refactor
+          if (dataset.placeholder) {
+            if (!dataset.regex && dataset.required && input.value === '') {
+              input.value = '';
+              input.placeholder = 'This value is required';
+              input.parentNode.dataset.invalid = true;
+            } else if (match) {
               delete input.parentNode.dataset.invalid;
             } else {
               input.value = '';
-              input.placeholder = input.dataset.error;
+              input.placeholder = dataset.error;
               input.parentNode.dataset.invalid = true;
             }
+          } else if (!dataset.regex && dataset.required && input.value === '') {
+            if (error) {
+              error.textContent = 'This value is required';
+            }
+            input.parentNode.dataset.invalid = true;
           } else if (error) {
             if (match) {
               if (error) {
@@ -99,7 +106,7 @@ var forEach = require('./util/forEach');
 
               delete input.parentNode.dataset.invalid;
             } else {
-              error.textContent = input.dataset.error;
+              error.textContent = dataset.error;
               input.parentNode.dataset.invalid = true;
             }
           }
