@@ -41,7 +41,7 @@ var forEach = require('./util/forEach');
           }
         });
 
-        if (options.onChange) {
+        if (options && options.onChange) {
           forEach(this.$inputs, function(input) {
             input.addEventListener('change', function() {
               _this.validate(input);
