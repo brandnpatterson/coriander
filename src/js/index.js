@@ -3,7 +3,7 @@ var forEach = require('./util/forEach');
 (function() {
   'use strict';
 
-  HTMLElement.prototype.coriander = function() {
+  HTMLElement.prototype.coriander = function(options) {
     var form = this;
 
     var coriander = {
@@ -40,6 +40,14 @@ var forEach = require('./util/forEach');
             window.scrollTo(0, 0);
           }
         });
+
+        if (options.onChange) {
+          forEach(this.$inputs, function(input) {
+            input.addEventListener('change', function() {
+              _this.validate(input);
+            });
+          });
+        }
       },
 
       setup: function() {
@@ -72,10 +80,10 @@ var forEach = require('./util/forEach');
         }
       },
 
-      validate: function() {
+      validate: function(single) {
         var _this = this;
 
-        forEach(this.$inputs, function(input) {
+        function validateSingle(input) {
           var dataset = input.dataset;
           var error = input.parentNode.querySelector('.coriander-error');
           var match = input.value.match(input.dataset.regex);
@@ -110,10 +118,9 @@ var forEach = require('./util/forEach');
               input.parentNode.dataset.invalid = true;
             }
           }
-        });
+        }
 
-        var input;
-        for (input in this.$radioByName) {
+        function validateSingleRadio() {
           var radio = _this.$radioByName[input];
           var parent = radio.parentNode;
           var error = parent.querySelector('.coriander-error');
@@ -127,6 +134,18 @@ var forEach = require('./util/forEach');
               error.textContent = radio.dataset.error;
             }
             parent.dataset.invalid = true;
+          }
+        }
+        if (single) {
+          validateSingle(single);
+        } else {
+          forEach(this.$inputs, function(input) {
+            validateSingle(input);
+          });
+
+          var input;
+          for (input in this.$radioByName) {
+            validateSingleRadio(input);
           }
         }
       }

@@ -23,9 +23,13 @@ A simple form validation library
 
 ```
 <script type="text/javascript">
+  var $date = document.querySelector('.date');
   var $form = document.querySelector('.form');
 
-  $form.coriander();
+  $date.append(new Date().getFullYear());
+  $form.coriander({
+    onChange: true
+  });
 </script>
 ```
 
