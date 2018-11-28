@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "dist/bundle.js",
   "scripts": {
-    "clean": "rimraf public/*.js && public/*.css",
+    "clean": "rimraf dist",
     "deploy": "gulp prod && surge",
     "eslint": "eslint src/js/index.js",
     "prod": "npm run clean && gulp prod",
