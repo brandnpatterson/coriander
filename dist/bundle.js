@@ -1,1 +1,221 @@
-!function(t){var e={};function a(n){if(e[n])return e[n].exports;var r=e[n]={i:n,l:!1,exports:{}};return t[n].call(r.exports,r,r.exports,a),r.l=!0,r.exports}a.m=t,a.c=e,a.d=function(t,e,n){a.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:n})},a.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return a.d(e,"a",e),e},a.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},a.p="",a(a.s=0)}([function(t,e,a){var n=a(1);!function(){"use strict";HTMLElement.prototype.coriander=function(){var t=this;({$radioByName:{},$totalInputsByName:[],init:function(){this.cacheDOM(),this.bindEvents(),this.setup()},cacheDOM:function(){this.$inputs=t.querySelectorAll('input:not([type="radio"])'),this.$radioInputs=t.querySelectorAll('input[type="radio"]')},bindEvents:function(){var e=this;t.addEventListener("submit",function(a){a.preventDefault(),e.validate();var r=e.$totalInputsByName.length;n(e.$totalInputsByName,function(t){t.parentNode.dataset.invalid&&r--}),e.$totalInputsByName.length===r?t.submit():window.scrollTo(0,0)}),t.addEventListener("change",function(){e.validate()})},setup:function(){var t,e=this;for(t in n(this.$inputs,function(t){if(e.$totalInputsByName.push(t),!t.dataset.placeholder&&t.dataset.required){var a=document.createElement("p");a.classList.add("coriander-error"),t.parentNode.appendChild(a)}}),n(e.$radioInputs,function(t){e.$radioByName[t.name]||(e.$radioByName[t.name]=t,e.$totalInputsByName.push(t))}),e.$radioByName){var a=document.createElement("p");a.classList.add("coriander-error"),e.$radioByName[t].parentNode.appendChild(a)}},validate:function(){var e;for(e in n(this.$inputs,function(t){var e=t.parentNode.querySelector(".coriander-error"),a=t.value.match(t.dataset.regex);t.dataset.placeholder?a?delete t.parentNode.dataset.invalid:(t.value="",t.placeholder=t.dataset.error,t.parentNode.dataset.invalid=!0):e&&(a?(e&&(e.textContent=""),delete t.parentNode.dataset.invalid):(e.textContent=t.dataset.error,t.parentNode.dataset.invalid=!0))}),this.$radioByName){var a=this.$radioByName[e],r=a.parentNode,o=r.querySelector(".coriander-error");"on"===t[a.name].value?(o.textContent="",delete r.dataset.invalid):(o&&(o.textContent=a.dataset.error),r.dataset.invalid=!0)}}}).init()}}()},function(t,e){t.exports=function(t,e){for(var a=0;a<t.length;a++)e(t[a],a,t)}}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var forEach = __webpack_require__(1);
+
+(function () {
+  'use strict';
+
+  HTMLElement.prototype.coriander = function () {
+    var form = this;
+
+    var coriander = {
+      $radioByName: {},
+      $totalInputsByName: [],
+      init: function () {
+        this.cacheDOM();
+        this.bindEvents();
+        this.setup();
+      },
+
+      cacheDOM: function () {
+        this.$inputs = form.querySelectorAll('input:not([type="radio"])');
+        this.$radioInputs = form.querySelectorAll('input[type="radio"]');
+      },
+
+      bindEvents: function () {
+        var _this = this;
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          _this.validate();
+
+          var validCount = _this.$totalInputsByName.length;
+          forEach(_this.$totalInputsByName, function (input) {
+            if (input.parentNode.dataset.invalid) {
+              validCount--;
+            }
+          });
+
+          if (_this.$totalInputsByName.length === validCount) {
+            form.submit();
+          } else {
+            window.scrollTo(0, 0);
+          }
+        });
+
+        form.addEventListener('change', function () {
+          _this.validate();
+        });
+      },
+
+      setup: function () {
+        var _this = this;
+
+        forEach(this.$inputs, function (input) {
+          _this.$totalInputsByName.push(input);
+
+          if (!input.dataset.placeholder && input.dataset.required) {
+            var error = document.createElement('p');
+
+            error.classList.add('coriander-error');
+            input.parentNode.appendChild(error);
+          }
+        });
+
+        forEach(_this.$radioInputs, function (input) {
+          if (!_this.$radioByName[input.name]) {
+            _this.$radioByName[input.name] = input;
+            _this.$totalInputsByName.push(input);
+          }
+        });
+
+        var input;
+        for (input in _this.$radioByName) {
+          var error = document.createElement('p');
+
+          error.classList.add('coriander-error');
+          _this.$radioByName[input].parentNode.appendChild(error);
+        }
+      },
+
+      validate: function () {
+        var _this = this;
+
+        forEach(this.$inputs, function (input) {
+          var error = input.parentNode.querySelector('.coriander-error');
+          var match = input.value.match(input.dataset.regex);
+
+          if (input.dataset.placeholder) {
+            if (match) {
+              delete input.parentNode.dataset.invalid;
+            } else {
+              input.value = '';
+              input.placeholder = input.dataset.error;
+              input.parentNode.dataset.invalid = true;
+            }
+          } else if (error) {
+            if (match) {
+              if (error) {
+                error.textContent = '';
+              }
+
+              delete input.parentNode.dataset.invalid;
+            } else {
+              error.textContent = input.dataset.error;
+              input.parentNode.dataset.invalid = true;
+            }
+          }
+        });
+
+        var input;
+        for (input in this.$radioByName) {
+          var radio = _this.$radioByName[input];
+          var parent = radio.parentNode;
+          var error = parent.querySelector('.coriander-error');
+
+          if (form[radio.name].value === 'on') {
+            error.textContent = '';
+
+            delete parent.dataset.invalid;
+          } else {
+            if (error) {
+              error.textContent = radio.dataset.error;
+            }
+            parent.dataset.invalid = true;
+          }
+        }
+      }
+    };
+
+    coriander.init();
+  };
+})();
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+/**
+ * Loop over array and return each iteration to process through callback function
+ *  @param {Array} arr
+ *  @param {Function} callback
+ */
+
+var forEach = function (arr, callback) {
+  for (var i = 0; i < arr.length; i++) {
+    callback(arr[i], i, arr);
+  }
+};
+
+module.exports = forEach;
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=bundle.js.map
