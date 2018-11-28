@@ -129,7 +129,10 @@
 
       $date.append(new Date().getFullYear());
       $form.coriander({
-        onChange: true
+        onChange: true,
+        onSubmit: function() {
+          $form.submit();
+        }
       });
     </script>
   </body>

@@ -35,7 +35,11 @@ var forEach = require('./util/forEach');
           });
 
           if (_this.$totalInputsByName.length === validCount) {
-            form.submit();
+            if (options.onSubmit) {
+              options.onSubmit();
+            } else {
+              form.submit();
+            }
           } else {
             window.scrollTo(0, 0);
           }
