@@ -42,12 +42,19 @@ var forEach = require('./util/forEach');
         });
 
         if (options && options.onChange) {
-          forEach(this.$inputs, function(input) {
-            input.addEventListener('change', function() {
-              _this.validate(input);
-            });
-          });
+          this.onChange(this.$inputs);
+          this.onChange(this.$radioInputs);
         }
+      },
+
+      onChange: function(inputs) {
+        var _this = this;
+
+        forEach(inputs, function(input) {
+          input.addEventListener('change', function() {
+            _this.validate(input);
+          });
+        });
       },
 
       setup: function() {
