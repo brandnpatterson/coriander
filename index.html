@@ -268,7 +268,13 @@
             }
           });
 
+          data.inputs.forEach(function(input) {
+            input.value = '';
+            input.checked = false;
+          });
+
           console.log(JSON.stringify(namesObj));
+          alert('Valid Form Submission!');
         }
       });
     </script>
