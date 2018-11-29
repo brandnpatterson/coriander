@@ -130,8 +130,18 @@
       $date.append(new Date().getFullYear());
       $form.coriander({
         onChange: true,
-        onSubmit: function() {
-          alert('Coriander Form Submitted!');
+        onSubmit: function(data) {
+          var namesObj = {};
+
+          var names = data.inputs.forEach(function() {
+            if (d.type === 'radio') {
+              namesObj[d.name] = d.nextElementSibling.textContent;
+            } else {
+              namesObj[d.name] = d.value;
+            }
+          });
+
+          console.log(JSON.stringify(namesObj));
         }
       });
     </script>

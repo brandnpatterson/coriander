@@ -36,7 +36,10 @@ var forEach = require('./util/forEach');
 
           if (_this.$totalInputsByName.length === validCount) {
             if (options.onSubmit) {
-              options.onSubmit();
+              options.onSubmit({
+                form: form,
+                inputs: _this.$totalInputsByName
+              });
             } else {
               form.submit();
             }
