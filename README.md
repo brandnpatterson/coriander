@@ -26,7 +26,20 @@ A simple form validation library
   var $form = document.querySelector('.form');
 
   $form.coriander({
-    onChange: true
+    onChange: true,
+    onSubmit: function(data) {
+      var namesObj = {};
+
+      var names = data.inputs.forEach(function(d) {
+        if (d.type === 'radio') {
+          namesObj[d.name] = d.nextElementSibling.textContent;
+        } else {
+          namesObj[d.name] = d.value;
+        }
+      });
+
+      console.log(JSON.stringify(namesObj));
+    }
   });
 </script>
 ```
