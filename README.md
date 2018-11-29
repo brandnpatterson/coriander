@@ -4,7 +4,7 @@ A simple form validation library
 
 ## Version
 
-1.2.1
+1.2.2
 
 ## Installation
 
@@ -50,6 +50,8 @@ optional arguments
 `onSubmit: Function` - handles when form is vaild.
 <br>
 (if not present, the form submits once validation passes)
+
+### Example
 
 ```javascript
 const form = document.querySelector('.form');
