@@ -1,7 +1,11 @@
-var forEach = require('./util/forEach');
-
 (function() {
   'use strict';
+
+  var forEach = function(arr, callback) {
+    for (var i = 0; i < arr.length; i++) {
+      callback(arr[i], i, arr);
+    }
+  };
 
   HTMLElement.prototype.coriander = function(options) {
     var form = this;
