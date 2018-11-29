@@ -6,13 +6,9 @@ A simple form validation library
 
 1.1.9
 
-<hr>
-
 ## Installation
 
 `npm install coriander`
-
-<hr>
 
 ## Getting Started
 
