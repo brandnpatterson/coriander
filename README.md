@@ -4,11 +4,33 @@ A simple form validation library
 
 ## Version
 
-1.1.8
+1.1.9
 
-## Example
+<hr>
 
-```
+## Installation
+
+`npm install coriander`
+
+<hr>
+
+## Getting Started
+
+### HTML data-\* Attributes
+
+Add datasets to the inputs in your form in order for coriander to recognize them
+
+`data-error:` custom error will display, otherwise a default message will appear
+<br>
+`data-placeholder:` validate using the placeholder attribute
+<br>
+`data-regex:` validate against regex
+<br>
+`data-required:` only validate if this is present
+
+### Example
+
+```html
 <input
   class="form-input"
   type="text"
@@ -21,27 +43,41 @@ A simple form validation library
 />
 ```
 
-```
-<script type="text/javascript">
-  var $form = document.querySelector('.form');
+<br>
 
-  $form.coriander({
-    onChange: true,
-    onSubmit: function(data) {
-      var namesObj = {};
+### Call coriander method
 
-      var names = data.inputs.forEach(function(d) {
-        if (d.type === 'radio') {
-          namesObj[d.name] = d.nextElementSibling.textContent;
-        } else {
-          namesObj[d.name] = d.value;
-        }
-      });
+`form.coriander();`
+<br>
+<br>
 
-      console.log(JSON.stringify(namesObj));
-    }
-  });
-</script>
+optional arguments
+
+`onChange: Boolean`
+<br>
+`onSubmit: Function` - handles when form is vaild.
+<br>
+(if not present, the form submits once validation passes)
+
+```javascript
+const form = document.querySelector('.form');
+
+form.coriander({
+  onChange: true,
+  onSubmit(data) {
+    const names = {};
+
+    data.inputs.forEach(d => {
+      if (d.type === 'radio') {
+        names[d.name] = d.nextElementSibling.textContent;
+      } else {
+        names[d.name] = d.value;
+      }
+    });
+
+    console.log(JSON.stringify(names));
+  }
+});
 ```
 
 ## Built With
@@ -57,3 +93,7 @@ A simple form validation library
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+```
+
+```
