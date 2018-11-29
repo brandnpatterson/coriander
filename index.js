@@ -9,9 +9,7 @@
 
   HTMLElement.prototype.coriander = function(options) {
     var form = this;
-    // var person;
-    // var pers;
-    // asdffs;
+
     var coriander = {
       $radioByName: {},
       $totalInputsByName: [],
