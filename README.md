@@ -39,13 +39,9 @@ Add datasets to the inputs in your form in order for coriander to recognize them
 />
 ```
 
-<br>
-
 ### Call coriander method
 
 `form.coriander();`
-<br>
-<br>
 
 optional arguments
 
