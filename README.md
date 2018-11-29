@@ -4,7 +4,7 @@ A simple form validation library
 
 ## Version
 
-1.1.5
+1.1.6
 
 ## Example
 
@@ -48,10 +48,6 @@ A simple form validation library
 
 - [Gulp](https://gulpjs.com/) - Task runner
 - [BrowserSync](https://browsersync.io/) - Local server
-- [Sass](https://sass-lang.com/) - SCSS partials
-- [Babel](https://babeljs.io/) - Compiles JS ES6 to ES5
-- [Webpack](https://webpack.js.org/) - Bundles JS files
-- [Stylelint](https://stylelint.io/) - Lints CSS / SCSS files
 - [ESLint](https://eslint.org/) - Lints JS files
 
 ## Authors
