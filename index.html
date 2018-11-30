@@ -280,17 +280,18 @@
       </form>
       <footer class="container footer">
         <a href="https://github.com/brandnpatterson" target="_blank">
-          &copy; <span class="date"></span> Brandon Patterson. All Rights
-          Reserved.
+          &copy;
+          <script type="text/javascript">
+            new Date().getFullYear();
+          </script>
+          Brandon Patterson. All Rights Reserved.
         </a>
       </footer>
     </div>
     <script src="index.js"></script>
     <script type="text/javascript">
-      var $date = document.querySelector('.date');
       var $form = document.querySelector('.form');
 
-      $date.append(new Date().getFullYear());
       $form.coriander({
         onChange: true,
         onSubmit: function(data) {
