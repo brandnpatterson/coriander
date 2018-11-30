@@ -4,7 +4,7 @@ A simple form validation library
 
 ## Version
 
-1.2.2
+1.2.3
 
 ## Installation
 
