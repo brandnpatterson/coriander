@@ -22,6 +22,7 @@
       cacheDOM: function() {
         this.$inputs = form.querySelectorAll('input:not([type="radio"])');
         this.$radioInputs = form.querySelectorAll('input[type="radio"]');
+        this.$textAreas = form.querySelectorAll('textarea');
       },
 
       bindEvents: function() {
@@ -55,6 +56,7 @@
         if (options && options.onChange) {
           this.onChange(this.$inputs);
           this.onChange(this.$radioInputs);
+          this.onChange(this.$textAreas);
         }
       },
 
@@ -86,6 +88,17 @@
           if (!_this.$radioByName[input.name]) {
             _this.$radioByName[input.name] = input;
             _this.$totalInputsByName.push(input);
+          }
+        });
+
+        forEach(_this.$textAreas, function(input) {
+          _this.$totalInputsByName.push(input);
+
+          if (input.dataset.required) {
+            var error = document.createElement('p');
+
+            error.classList.add('coriander-error');
+            input.parentNode.appendChild(error);
           }
         });
 
@@ -158,6 +171,10 @@
           validateSingle(single);
         } else {
           forEach(this.$inputs, function(input) {
+            validateSingle(input);
+          });
+
+          forEach(this.$textAreas, function(input) {
             validateSingle(input);
           });
 
