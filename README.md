@@ -8,7 +8,11 @@ A simple form validation library
 
 ## Installation
 
+### npm
 `npm install coriander`
+
+### unpkg
+`<script src="https://unpkg.com/coriander@1.2.4/index.js"></script>`
 
 ## Getting Started
 
