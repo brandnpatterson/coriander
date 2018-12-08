@@ -82,7 +82,7 @@ form.coriander({
 
 - [Gulp](https://gulpjs.com/) - Task runner
 - [BrowserSync](https://browsersync.io/) - Local server
-- [ESLint](https://eslint.org/) - Lints JS files
+- [ESLint](https://eslint.org/) - Linter for JS files
 
 ## Authors
 
