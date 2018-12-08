@@ -1,6 +1,6 @@
 # Coriander
 
-A simple form validation library
+Form validation library built with JavaScript
 
 ## Version
 
