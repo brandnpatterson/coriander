@@ -4,7 +4,7 @@ Form validation library built with JavaScript
 
 ## Version
 
-1.2.7
+1.2.8
 
 ## Installation
 
@@ -14,7 +14,7 @@ Form validation library built with JavaScript
 
 ### unpkg
 
-`<script src="https://unpkg.com/coriander@1.2.4/index.js"></script>`
+`<script src="https://unpkg.com/coriander@1.2.8/index.js"></script>`
 
 ## Getting Started
 
