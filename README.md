@@ -9,9 +9,11 @@ Form validation library built with JavaScript
 ## Installation
 
 ### npm
+
 `npm install coriander`
 
 ### unpkg
+
 `<script src="https://unpkg.com/coriander@1.2.4/index.js"></script>`
 
 ## Getting Started
@@ -91,7 +93,3 @@ form.coriander({
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-```
-
-```
