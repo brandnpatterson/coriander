@@ -4,7 +4,7 @@ Form validation library built with JavaScript
 
 ## Version
 
-1.2.8
+1.2.9
 
 ## Installation
 
@@ -14,21 +14,42 @@ Form validation library built with JavaScript
 
 ### unpkg
 
-`<script src="https://unpkg.com/coriander@1.2.8/index.js"></script>`
+`<script src="https://unpkg.com/coriander@1.2.9/index.js"></script>`
 
 ## Getting Started
 
-### HTML data-\* Attributes
+### Dataset Options
 
-Add datasets to the inputs in your form in order for coriander to recognize them
-
-`data-error:` custom error will display, otherwise a default message will appear
-<br>
-`data-placeholder:` validate using the placeholder attribute
-<br>
-`data-regex:` validate against regex
-<br>
-`data-required:` only validate if this is present
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>data-error</th>
+      <th>string</th>
+      <th>'This value is required'</th>
+      <th>Error reporting for an input with failed validation</th>
+    </tr>
+    <tr>
+      <th>data-regex</th>
+      <th>string</th>
+      <th>undefined</th>
+      <th>Validate input against regex</th>
+    </tr>
+    <tr>
+      <th>data-required</th>
+      <th>boolean</th>
+      <th>undefined</th>
+      <th>Only validate input if this is present</th>
+    </tr>
+  </tbody>
+</table>
 
 ### Example
 
@@ -39,23 +60,43 @@ Add datasets to the inputs in your form in order for coriander to recognize them
   id="name"
   name="name"
   data-error="Please enter letters only"
-  data-placeholder="true"
   data-regex="[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$"
   data-required="true"
 />
 ```
 
-### Call coriander method
+## Call coriander method
 
-`form.coriander();`
+```
+form.coriander();
+```
 
-optional arguments
+### Method Options
 
-`onChange: Boolean`
-<br>
-`onSubmit: Function` - handles when form is vaild.
-<br>
-(if not present, the form submits once validation passes)
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>onChange</th>
+      <th>boolean</th>
+      <th>undefined</th>
+      <th>Listen for validation when a change is made to the inputs</th>
+    </tr>
+    <tr>
+      <th>onSubmit</th>
+      <th>function</th>
+      <th>submit the form if validation passes</th>
+      <th>handle what to do when validation passes</th>
+    </tr>
+  </tbody>
+</table>
 
 ### Example
 

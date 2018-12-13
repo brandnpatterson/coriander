@@ -18,13 +18,11 @@
         this.bindEvents();
         this.setup();
       },
-
       cacheDOM: function() {
         this.$inputs = form.querySelectorAll('input:not([type="radio"])');
         this.$radioInputs = form.querySelectorAll('input[type="radio"]');
         this.$textAreas = form.querySelectorAll('textarea');
       },
-
       bindEvents: function() {
         var _this = this;
 
@@ -59,7 +57,6 @@
           this.onChange(this.$textAreas);
         }
       },
-
       onChange: function(inputs) {
         var _this = this;
 
@@ -69,14 +66,13 @@
           });
         });
       },
-
       setup: function() {
         var _this = this;
 
         forEach(this.$inputs, function(input) {
           _this.$totalInputsByName.push(input);
 
-          if (!input.dataset.placeholder && input.dataset.required) {
+          if (input.dataset.required) {
             var error = document.createElement('p');
 
             error.classList.add('coriander-error');
@@ -110,7 +106,6 @@
           _this.$radioByName[input].parentNode.appendChild(error);
         }
       },
-
       validate: function(single) {
         var _this = this;
 
@@ -119,20 +114,7 @@
           var error = input.parentNode.querySelector('.coriander-error');
           var match = input.value.match(input.dataset.regex);
 
-          // @todo refactor
-          if (dataset.placeholder) {
-            if (!dataset.regex && dataset.required && input.value === '') {
-              input.value = '';
-              input.placeholder = 'This value is required';
-              input.parentNode.dataset.invalid = true;
-            } else if (match) {
-              delete input.parentNode.dataset.invalid;
-            } else {
-              input.value = '';
-              input.placeholder = dataset.error;
-              input.parentNode.dataset.invalid = true;
-            }
-          } else if (!dataset.regex && dataset.required && input.value === '') {
+          if (!dataset.regex && dataset.required && input.value === '') {
             if (error) {
               error.textContent = 'This value is required';
             }
