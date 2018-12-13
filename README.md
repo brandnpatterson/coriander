@@ -1,3 +1,9 @@
+<style>
+table {
+  display: table !important;
+}
+</style>
+
 # Coriander
 
 Form validation library built with JavaScript
@@ -20,7 +26,7 @@ Form validation library built with JavaScript
 
 ### Dataset Options
 
-<table style="display: table;">
+<table>
   <thead>
     <tr>
       <th>Option</th>
@@ -73,7 +79,7 @@ form.coriander();
 
 ### Method Options
 
-<table style="display: table;">
+<table>
   <thead>
     <tr>
       <th>Option</th>
