@@ -20,7 +20,7 @@ Form validation library built with JavaScript
 
 ### Dataset Options
 
-<table>
+<table style="display: table;">
   <thead>
     <tr>
       <th>Option</th>
@@ -73,7 +73,7 @@ form.coriander();
 
 ### Method Options
 
-<table>
+<table style="display: table;">
   <thead>
     <tr>
       <th>Option</th>
