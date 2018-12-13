@@ -4,7 +4,7 @@ Form validation library built with JavaScript
 
 ## Version
 
-1.2.9
+1.3.0
 
 ## Installation
 
@@ -14,7 +14,7 @@ Form validation library built with JavaScript
 
 ### unpkg
 
-`<script src="https://unpkg.com/coriander@1.2.9/index.js"></script>`
+`<script src="https://unpkg.com/coriander@1.3.0/index.js"></script>`
 
 ## Getting Started
 
@@ -31,22 +31,22 @@ Form validation library built with JavaScript
   </thead>
   <tbody>
     <tr>
-      <th>data-error</th>
-      <th>string</th>
-      <th>'This value is required'</th>
-      <th>Error reporting for an input with failed validation</th>
+      <td>data-error</td>
+      <td>string</td>
+      <td>'This value is required'</td>
+      <td>Error reporting for an input with failed validation</td>
     </tr>
     <tr>
-      <th>data-regex</th>
-      <th>string</th>
-      <th>undefined</th>
-      <th>Validate input against regex</th>
+      <td>data-regex</td>
+      <td>string</td>
+      <td>undefined</td>
+      <td>Validate input against regex</td>
     </tr>
     <tr>
-      <th>data-required</th>
-      <th>boolean</th>
-      <th>undefined</th>
-      <th>Only validate input if this is present</th>
+      <td>data-required</td>
+      <td>boolean</td>
+      <td>undefined</td>
+      <td>Only validate input if this is present</td>
     </tr>
   </tbody>
 </table>
@@ -84,16 +84,16 @@ form.coriander();
   </thead>
   <tbody>
     <tr>
-      <th>onChange</th>
-      <th>boolean</th>
-      <th>undefined</th>
-      <th>Listen for validation when a change is made to the inputs</th>
+      <td>onChange</td>
+      <td>boolean</td>
+      <td>undefined</td>
+      <td>Listen for validation when a change is made to the inputs</td>
     </tr>
     <tr>
-      <th>onSubmit</th>
-      <th>function</th>
-      <th>submit the form if validation passes</th>
-      <th>handle what to do when validation passes</th>
+      <td>onSubmit</td>
+      <td>function</td>
+      <td>submit the form if validation passes</td>
+      <td>handle what to do when validation passes</td>
     </tr>
   </tbody>
 </table>
