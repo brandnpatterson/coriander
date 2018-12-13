@@ -26,11 +26,11 @@ Form validation library built with JavaScript
 
 ### Dataset Options
 
-| Option        |  Type   |                  Default |                                         Description |
-| ------------- | :-----: | -----------------------: | --------------------------------------------------: |
-| data-error    | string  | 'This value is required' | Error reporting for an input with failed validation |
-| data-regex    | string  |                undefined |                        Validate input against regex |
-| data-required | boolean |                undefined |              Only validate input if this is present |
+| Option        |  Type   |                  Default |                                                      Description |
+| ------------- | :-----: | -----------------------: | ---------------------------------------------------------------: |
+| data-error    | string  | 'This value is required' | Error reporting that displays when validation fails for an input |
+| data-regex    | string  |                undefined |                                     Validate input against regex |
+| data-required | boolean |                undefined |                           Only validate input if this is present |
 
 ### Example
 
@@ -54,10 +54,10 @@ form.coriander();
 
 ### Method Options
 
-| Option   |   Type   |                              Default |                                               Description |
-| -------- | :------: | -----------------------------------: | --------------------------------------------------------: |
-| onChange | boolean  |                            undefined | Listen for validation when a change is made to the inputs |
-| onSubmit | function | submit the form if validation passes |                  handle what to do when validation passes |
+| Option   |   Type   |                              Default |                                             Description |
+| -------- | :------: | -----------------------------------: | ------------------------------------------------------: |
+| onChange | boolean  |                            undefined | Listen for validation when a change is made to an input |
+| onSubmit | function | submit the form if validation passes |                handle what to do when validation passes |
 
 ### Example
 
