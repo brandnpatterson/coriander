@@ -1,9 +1,3 @@
-<style>
-table {
-  display: table !important;
-}
-</style>
-
 # Coriander
 
 Form validation library built with JavaScript
