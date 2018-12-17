@@ -11,8 +11,7 @@
     var form = this;
 
     var coriander = {
-      $radioByName: {},
-      $totalInputsByName: [],
+      $totalInputs: [],
       init: function() {
         this.cacheDOM();
         this.bindEvents();
@@ -30,18 +29,24 @@
           e.preventDefault();
           _this.validate();
 
-          var validCount = _this.$totalInputsByName.length;
-          forEach(_this.$totalInputsByName, function(input) {
+          var validCount = _this.$totalInputs.length;
+          forEach(_this.$totalInputs, function(input) {
             if (input.parentNode.dataset.invalid) {
               validCount--;
             }
           });
 
-          if (_this.$totalInputsByName.length === validCount) {
+          if (_this.$totalInputs.length === validCount) {
             if (options.onSubmit) {
               options.onSubmit({
                 form: form,
-                inputs: _this.$totalInputsByName
+                inputs: _this.$totalInputs.filter(function(input) {
+                  if (input.type === 'radio' && input.checked === 'on') {
+                    return input;
+                  }
+
+                  return input;
+                })
               });
             } else {
               form.submit();
@@ -70,7 +75,7 @@
         var _this = this;
 
         forEach(this.$inputs, function(input) {
-          _this.$totalInputsByName.push(input);
+          _this.$totalInputs.push(input);
 
           if (input.dataset.required) {
             var error = document.createElement('p');
@@ -81,14 +86,11 @@
         });
 
         forEach(_this.$radioInputs, function(input) {
-          if (!_this.$radioByName[input.name]) {
-            _this.$radioByName[input.name] = input;
-            _this.$totalInputsByName.push(input);
-          }
+          _this.$totalInputs.push(input);
         });
 
         forEach(_this.$textAreas, function(input) {
-          _this.$totalInputsByName.push(input);
+          _this.$totalInputs.push(input);
 
           if (input.dataset.required) {
             var error = document.createElement('p');
@@ -97,18 +99,8 @@
             input.parentNode.appendChild(error);
           }
         });
-
-        var input;
-        for (input in _this.$radioByName) {
-          var error = document.createElement('p');
-
-          error.classList.add('coriander-error');
-          _this.$radioByName[input].parentNode.appendChild(error);
-        }
       },
       validate: function(single) {
-        var _this = this;
-
         function validateSingle(input) {
           var dataset = input.dataset;
           var error = input.parentNode.querySelector('.coriander-error');
@@ -118,6 +110,7 @@
             if (error) {
               error.textContent = 'This value is required';
             }
+
             input.parentNode.dataset.invalid = true;
           } else if (error) {
             if (match) {
@@ -133,22 +126,25 @@
           }
         }
 
-        function validateSingleRadio() {
-          var radio = _this.$radioByName[input];
-          var parent = radio.parentNode;
+        function validateSingleRadio(input) {
+          var parent = input.parentNode;
           var error = parent.querySelector('.coriander-error');
 
-          if (form[radio.name].value === 'on') {
-            error.textContent = '';
+          if (form[input.name].value === 'on') {
+            if (error) {
+              error.textContent = '';
+            }
 
             delete parent.dataset.invalid;
           } else {
             if (error) {
-              error.textContent = radio.dataset.error;
+              error.textContent = input.dataset.error;
             }
+
             parent.dataset.invalid = true;
           }
         }
+
         if (single) {
           validateSingle(single);
         } else {
@@ -161,8 +157,10 @@
           });
 
           var input;
-          for (input in this.$radioByName) {
-            validateSingleRadio(input);
+          for (input in this.$totalInputs) {
+            if (this.$totalInputs[input].type === 'radio') {
+              validateSingleRadio(this.$totalInputs[input]);
+            }
           }
         }
       }
