@@ -17,6 +17,6 @@ gulp.task('default', ['eslint'], () => {
     }
   });
 
-  gulp.watch('./index.js', ['eslint', browserSync.reload]);
+  gulp.watch('./src/**/*.js', ['eslint', browserSync.reload]);
   gulp.watch('./index.html', browserSync.reload);
 });
