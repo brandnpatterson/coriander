@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   var forEach = function(arr, callback) {
@@ -7,10 +7,8 @@
     }
   };
 
-  HTMLElement.prototype.coriander = function(options) {
-    var form = this;
-
-    var coriander = {
+  window.coriander = function coriander(form, options) {
+    var app = {
       $totalInputs: [],
       init: function() {
         this.cacheDOM();
@@ -166,6 +164,7 @@
       }
     };
 
-    coriander.init();
+    app.init();
   };
-})();
+
+}());
