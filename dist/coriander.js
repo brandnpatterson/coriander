@@ -1,5 +1,12 @@
-(function () {
-  'use strict';
+(function (factory) {
+  typeof define === 'function' && define.amd ? define(factory) :
+  factory();
+}(function () { 'use strict';
+
+  /**
+   * Coriander
+   * v1.3.4
+   */
 
   var forEach = function(arr, callback) {
     for (var i = 0; i < arr.length; i++) {
@@ -7,7 +14,9 @@
     }
   };
 
-  window.coriander = function coriander(form, options) {
+  function coriander(options) {
+    var form = this;
+
     var app = {
       $totalInputs: [],
       init: function() {
@@ -165,6 +174,12 @@
     };
 
     app.init();
-  };
+  }
 
-}());
+  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = coriander;
+  } else {
+    HTMLElement.prototype.coriander = coriander;
+  }
+
+}));

@@ -1,10 +1,17 @@
+/**
+ * Coriander
+ * v1.3.4
+ */
+
 var forEach = function(arr, callback) {
   for (var i = 0; i < arr.length; i++) {
     callback(arr[i], i, arr);
   }
 };
 
-window.coriander = function coriander(form, options) {
+function coriander(options) {
+  var form = this;
+
   var app = {
     $totalInputs: [],
     init: function() {
@@ -162,4 +169,10 @@ window.coriander = function coriander(form, options) {
   };
 
   app.init();
-};
+}
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = coriander;
+} else {
+  HTMLElement.prototype.coriander = coriander;
+}

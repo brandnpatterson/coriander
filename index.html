@@ -287,11 +287,11 @@
       </footer>
     </div>
     <script src="https://unpkg.com/css-vars-ponyfill@1"></script>
-    <script src="bundle.js"></script>
+    <script src="dist/coriander.js"></script>
     <script type="text/javascript">
       var $form = document.querySelector('.form');
 
-      coriander($form, {
+      $form.coriander({
         onChange: true,
         onSubmit: function(data) {
           var namesObj = {};
