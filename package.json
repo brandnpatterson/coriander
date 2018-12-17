@@ -7,7 +7,6 @@
   "scripts": {
     "deploy": "surge",
     "eslint": "eslint index.js",
-    "prod": "gulp prod",
     "start": "gulp"
   },
   "devDependencies": {
