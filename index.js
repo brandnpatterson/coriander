@@ -41,11 +41,11 @@
               options.onSubmit({
                 form: form,
                 inputs: _this.$totalInputs.filter(function(input) {
-                  if (input.type === 'radio' && input.checked === 'on') {
+                  if (input.type === 'radio' && input.checked === true) {
+                    return input;
+                  } else if (input.type !== 'radio') {
                     return input;
                   }
-
-                  return input;
                 })
               });
             } else {
