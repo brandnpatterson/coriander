@@ -11,7 +11,7 @@
 	var main = createCommonjsModule(function (module) {
 	/**
 	 * Coriander
-	 * v1.3.9
+	 * v1.4.0
 	 */
 
 	var forEach = function(arr, callback) {
@@ -180,10 +180,10 @@
 	  app.init();
 	}
 
-	if (typeof window !== 'undefined') {
-	  window.coriander = coriander;
-	} else {
+	if (typeof window === 'undefined') {
 	  module.exports = coriander;
+	} else if (typeof window !== 'undefined') {
+	  window.coriander = coriander;
 	}
 	});
 
