@@ -1,183 +1,190 @@
-(function (factory) {
-  typeof define === 'function' && define.amd ? define(factory) :
-  factory();
-}(function () { 'use strict';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	global.bundle = factory();
+}(typeof self !== 'undefined' ? self : this, function () { 'use strict';
 
-  /**
-   * Coriander
-   * v1.3.6
-   */
+	function createCommonjsModule(fn, module) {
+		return module = { exports: {} }, fn(module, module.exports), module.exports;
+	}
 
-  var forEach = function(arr, callback) {
-    for (var i = 0; i < arr.length; i++) {
-      callback(arr[i], i, arr);
-    }
-  };
+	var main = createCommonjsModule(function (module) {
+	/**
+	 * Coriander
+	 * v1.3.7
+	 */
 
-  function coriander(form, options) {
-    var app = {
-      $totalInputs: [],
-      init: function() {
-        this.cacheDOM();
-        this.bindEvents();
-        this.setup();
-      },
-      cacheDOM: function() {
-        this.$inputs = form.querySelectorAll('input:not([type="radio"])');
-        this.$radioInputs = form.querySelectorAll('input[type="radio"]');
-        this.$textAreas = form.querySelectorAll('textarea');
-      },
-      bindEvents: function() {
-        var _this = this;
+	var forEach = function(arr, callback) {
+	  for (var i = 0; i < arr.length; i++) {
+	    callback(arr[i], i, arr);
+	  }
+	};
 
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          _this.validate();
+	function coriander(form, options) {
+	  var app = {
+	    $totalInputs: [],
+	    init: function() {
+	      this.cacheDOM();
+	      this.bindEvents();
+	      this.setup();
+	    },
+	    cacheDOM: function() {
+	      this.$inputs = form.querySelectorAll('input:not([type="radio"])');
+	      this.$radioInputs = form.querySelectorAll('input[type="radio"]');
+	      this.$textAreas = form.querySelectorAll('textarea');
+	    },
+	    bindEvents: function() {
+	      var _this = this;
 
-          var validCount = _this.$totalInputs.length;
-          forEach(_this.$totalInputs, function(input) {
-            if (input.parentNode.dataset.invalid) {
-              validCount--;
-            }
-          });
+	      form.addEventListener('submit', function(e) {
+	        e.preventDefault();
+	        _this.validate();
 
-          if (_this.$totalInputs.length === validCount) {
-            if (options.onSubmit) {
-              options.onSubmit({
-                form: form,
-                inputs: _this.$totalInputs.filter(function(input) {
-                  if (input.type === 'radio' && input.checked === true) {
-                    return input;
-                  } else if (input.type !== 'radio') {
-                    return input;
-                  }
-                })
-              });
-            } else {
-              form.submit();
-            }
-          } else {
-            window.scrollTo(0, 0);
-          }
-        });
+	        var validCount = _this.$totalInputs.length;
+	        forEach(_this.$totalInputs, function(input) {
+	          if (input.parentNode.dataset.invalid) {
+	            validCount--;
+	          }
+	        });
 
-        if (options && options.onChange) {
-          this.onChange(this.$inputs);
-          this.onChange(this.$radioInputs);
-          this.onChange(this.$textAreas);
-        }
-      },
-      onChange: function(inputs) {
-        var _this = this;
+	        if (_this.$totalInputs.length === validCount) {
+	          if (options.onSubmit) {
+	            options.onSubmit({
+	              form: form,
+	              inputs: _this.$totalInputs.filter(function(input) {
+	                if (input.type === 'radio' && input.checked === true) {
+	                  return input;
+	                } else if (input.type !== 'radio') {
+	                  return input;
+	                }
+	              })
+	            });
+	          } else {
+	            form.submit();
+	          }
+	        } else {
+	          window.scrollTo(0, 0);
+	        }
+	      });
 
-        forEach(inputs, function(input) {
-          input.addEventListener('change', function() {
-            _this.validate(input);
-          });
-        });
-      },
-      setup: function() {
-        var _this = this;
+	      if (options && options.onChange) {
+	        this.onChange(this.$inputs);
+	        this.onChange(this.$radioInputs);
+	        this.onChange(this.$textAreas);
+	      }
+	    },
+	    onChange: function(inputs) {
+	      var _this = this;
 
-        forEach(this.$inputs, function(input) {
-          _this.$totalInputs.push(input);
+	      forEach(inputs, function(input) {
+	        input.addEventListener('change', function() {
+	          _this.validate(input);
+	        });
+	      });
+	    },
+	    setup: function() {
+	      var _this = this;
 
-          if (input.dataset.required) {
-            var error = document.createElement('p');
+	      forEach(this.$inputs, function(input) {
+	        _this.$totalInputs.push(input);
 
-            error.classList.add('coriander-error');
-            input.parentNode.appendChild(error);
-          }
-        });
+	        if (input.dataset.required) {
+	          var error = document.createElement('p');
 
-        forEach(_this.$radioInputs, function(input) {
-          _this.$totalInputs.push(input);
-        });
+	          error.classList.add('coriander-error');
+	          input.parentNode.appendChild(error);
+	        }
+	      });
 
-        forEach(_this.$textAreas, function(input) {
-          _this.$totalInputs.push(input);
+	      forEach(_this.$radioInputs, function(input) {
+	        _this.$totalInputs.push(input);
+	      });
 
-          if (input.dataset.required) {
-            var error = document.createElement('p');
+	      forEach(_this.$textAreas, function(input) {
+	        _this.$totalInputs.push(input);
 
-            error.classList.add('coriander-error');
-            input.parentNode.appendChild(error);
-          }
-        });
-      },
-      validate: function(single) {
-        function validateSingle(input) {
-          var dataset = input.dataset;
-          var error = input.parentNode.querySelector('.coriander-error');
-          var match = input.value.match(input.dataset.regex);
+	        if (input.dataset.required) {
+	          var error = document.createElement('p');
 
-          if (!dataset.regex && dataset.required && input.value === '') {
-            if (error) {
-              error.textContent = 'This value is required';
-            }
+	          error.classList.add('coriander-error');
+	          input.parentNode.appendChild(error);
+	        }
+	      });
+	    },
+	    validate: function(single) {
+	      function validateSingle(input) {
+	        var dataset = input.dataset;
+	        var error = input.parentNode.querySelector('.coriander-error');
+	        var match = input.value.match(input.dataset.regex);
 
-            input.parentNode.dataset.invalid = true;
-          } else if (error) {
-            if (match) {
-              if (error) {
-                error.textContent = '';
-              }
+	        if (!dataset.regex && dataset.required && input.value === '') {
+	          if (error) {
+	            error.textContent = 'This value is required';
+	          }
 
-              delete input.parentNode.dataset.invalid;
-            } else {
-              error.textContent = dataset.error;
-              input.parentNode.dataset.invalid = true;
-            }
-          }
-        }
+	          input.parentNode.dataset.invalid = true;
+	        } else if (error) {
+	          if (match) {
+	            if (error) {
+	              error.textContent = '';
+	            }
 
-        function validateSingleRadio(input) {
-          var parent = input.parentNode;
-          var error = parent.querySelector('.coriander-error');
+	            delete input.parentNode.dataset.invalid;
+	          } else {
+	            error.textContent = dataset.error;
+	            input.parentNode.dataset.invalid = true;
+	          }
+	        }
+	      }
 
-          if (form[input.name].value === 'on') {
-            if (error) {
-              error.textContent = '';
-            }
+	      function validateSingleRadio(input) {
+	        var parent = input.parentNode;
+	        var error = parent.querySelector('.coriander-error');
 
-            delete parent.dataset.invalid;
-          } else {
-            if (error) {
-              error.textContent = input.dataset.error;
-            }
+	        if (form[input.name].value === 'on') {
+	          if (error) {
+	            error.textContent = '';
+	          }
 
-            parent.dataset.invalid = true;
-          }
-        }
+	          delete parent.dataset.invalid;
+	        } else {
+	          if (error) {
+	            error.textContent = input.dataset.error;
+	          }
 
-        if (single) {
-          validateSingle(single);
-        } else {
-          forEach(this.$inputs, function(input) {
-            validateSingle(input);
-          });
+	          parent.dataset.invalid = true;
+	        }
+	      }
 
-          forEach(this.$textAreas, function(input) {
-            validateSingle(input);
-          });
+	      if (single) {
+	        validateSingle(single);
+	      } else {
+	        forEach(this.$inputs, function(input) {
+	          validateSingle(input);
+	        });
 
-          var input;
-          for (input in this.$totalInputs) {
-            if (this.$totalInputs[input].type === 'radio') {
-              validateSingleRadio(this.$totalInputs[input]);
-            }
-          }
-        }
-      }
-    };
+	        forEach(this.$textAreas, function(input) {
+	          validateSingle(input);
+	        });
 
-    app.init();
-  }
+	        var input;
+	        for (input in this.$totalInputs) {
+	          if (this.$totalInputs[input].type === 'radio') {
+	            validateSingleRadio(this.$totalInputs[input]);
+	          }
+	        }
+	      }
+	    }
+	  };
 
-  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-    module.exports = coriander;
-  } else {
-    window.coriander = coriander;
-  }
+	  app.init();
+	}
+
+	{
+	  module.exports = coriander;
+	}
+	});
+
+	return main;
 
 }));
