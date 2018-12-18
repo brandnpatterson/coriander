@@ -1,0 +1,144 @@
+:root {
+  --black: #000;
+  --green: #008000;
+  --light: #ccc;
+  --light2: #ddd;
+  --red: #f00;
+  --teal: #39c;
+  --white: #fff;
+}
+
+.title {
+  font-size: 60px;
+}
+
+.subtitle {
+  font-weight: lighter;
+}
+
+.button {
+  border: 0;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 15px;
+  margin: 8px 0;
+  padding: 12px 20px 12px 10px;
+  width: 100%;
+}
+
+.button-primary {
+  background: var(--teal);
+  color: var(--white);
+}
+
+.button-success {
+  background: var(--green);
+  color: var(--white);
+}
+
+.footer a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.form {
+  margin-bottom: 75px;
+}
+
+.form-content {
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-input {
+  border: 1px solid var(--light);
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 3px var(--light2);
+  box-shadow: inset 0 1px 3px var(--light2);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 15px;
+  margin: 8px 0;
+  padding: 10px 20px 10px 10px;
+  width: 100%;
+}
+
+.form-input::-webkit-input-placeholder {
+  color: var(--red);
+}
+
+.form-input::-ms-input-placeholder {
+  color: var(--red);
+}
+
+.form-input::placeholder {
+  color: var(--red);
+}
+
+.radio-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 5px;
+}
+.radio-group .form-label {
+  margin: 0 5px;
+}
+
+.coriander-error {
+  color: var(--red);
+  margin: 0;
+  min-height: 18px;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 750px;
+  width: 85%;
+}
+
+.container {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.results {
+  margin-bottom: 100px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: 45px;
+    margin-bottom: 0;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .footer a {
+    font-size: 14px;
+  }
+}
