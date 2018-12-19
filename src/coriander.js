@@ -7,12 +7,6 @@ function coriander(form, options) {
   var app = {
     $allInputs: [],
 
-    options: {
-      onSubmit: function() {
-        form.submit();
-      }
-    },
-
     init: function() {
       this.cacheDOM();
       this.setup();
@@ -91,7 +85,7 @@ function coriander(form, options) {
             })
           });
         } else {
-          this.options.onSubmit();
+          form.submit();
         }
       } else {
         window.scrollTo(0, 0);
