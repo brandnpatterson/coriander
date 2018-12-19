@@ -1,6 +1,6 @@
 /**
  * Coriander
- * v1.4.5
+ * v1.4.6
  */
 
 function coriander(form, options) {
@@ -93,6 +93,8 @@ function coriander(form, options) {
         } else {
           this.options.onSubmit();
         }
+      } else {
+        window.scrollTo(0, 0);
       }
     },
 
