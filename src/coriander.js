@@ -1,6 +1,6 @@
 /**
  * Coriander
- * v1.4.6
+ * v1.4.7
  */
 
 function coriander(form, options) {
