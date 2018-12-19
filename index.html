@@ -96,6 +96,7 @@
               type="radio"
               id="catYes"
               name="cat"
+              value="yes"
               data-error="Please choose an option"
               data-required="true"
             />
@@ -104,6 +105,7 @@
               type="radio"
               id="catNo"
               name="cat"
+              value="no"
               data-error="Please choose an option"
             />
             <label class="form-label" for="catNo">No</label>
@@ -114,6 +116,7 @@
               type="radio"
               id="dogYes"
               name="dog"
+              value="yes"
               data-error="Please choose an option"
               data-required="true"
             />
@@ -122,9 +125,19 @@
               type="radio"
               id="dogNo"
               name="dog"
+              value="no"
               data-error="Please choose an option"
             />
             <label class="form-label" for="dogNo">No</label>
+          </div>
+          <div class="form-group">
+            <textarea
+              data-required="true"
+              name="something"
+              id="something"
+              cols="30"
+              rows="10"
+            ></textarea>
           </div>
         </div>
         <div class="form-group">
@@ -151,6 +164,8 @@
         onSubmit: function(data) {
           var namesObj = {};
 
+          data.form.reset();
+
           var names = data.inputs.forEach(function(d) {
             if (d.type === 'radio') {
               namesObj[d.name] = d.nextElementSibling.textContent;
@@ -165,7 +180,6 @@
           });
 
           console.log(JSON.stringify(namesObj));
-          alert('Valid Form Submission!');
         }
       });
 
