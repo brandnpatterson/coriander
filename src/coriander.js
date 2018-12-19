@@ -1,6 +1,6 @@
 /**
  * Coriander
- * v1.4.4
+ * v1.4.5
  */
 
 function coriander(form, options) {
@@ -15,6 +15,7 @@ function coriander(form, options) {
 
     init: function() {
       this.cacheDOM();
+      this.setup();
       this.bindEvents();
     },
 
@@ -24,22 +25,58 @@ function coriander(form, options) {
       this.$textAreas = form.querySelectorAll('textarea');
     },
 
+    newError: function(input) {
+      var error = document.createElement('p');
+
+      error.classList.add('coriander-error');
+      input.parentNode.appendChild(error);
+    },
+
+    setup: function() {
+      var _this = this;
+
+      this.$inputs.forEach(function(input) {
+        _this.$allInputs.push(input);
+        _this.newError(input);
+      });
+
+      this.$radioInputs.forEach(function(input) {
+        _this.$allInputs.push(input);
+        _this.newError(input);
+      });
+
+      this.$textAreas.forEach(function(input) {
+        _this.$allInputs.push(input);
+        _this.newError(input);
+      });
+    },
+
     bindEvents: function() {
+      var _this = this;
+
       form.addEventListener('submit', this.onValidate.bind(this));
+
+      if (options.onChange) {
+        this.$allInputs.forEach(function(input) {
+          input.addEventListener('change', function() {
+            _this.validate(input);
+          });
+        });
+      }
     },
 
     onValidate: function(e) {
       e.preventDefault();
 
-      var testGroups = [
-        this.testIfValid(this.$inputs),
-        this.testIfValid(this.$radioInputs),
-        this.testIfValid(this.$textAreas)
-      ];
+      var _this = this;
 
-      result = testGroups.every(function(group) {
-        return group === true;
-      });
+      var result = this.$allInputs
+        .map(function(input) {
+          return _this.validate(input);
+        })
+        .every(function(group) {
+          return group === true;
+        });
 
       if (result) {
         if (options.onSubmit) {
@@ -60,12 +97,7 @@ function coriander(form, options) {
     },
 
     showError: function(input) {
-      var error = document.createElement('p');
-
-      if (!input.parentNode.querySelector('.coriander-error')) {
-        error.classList.add('coriander-error');
-        input.parentNode.appendChild(error);
-      }
+      var error = input.parentNode.querySelector('.coriander-error');
 
       if (input.dataset.error) {
         error.textContent = input.dataset.error;
@@ -74,7 +106,6 @@ function coriander(form, options) {
       }
 
       input.parentNode.dataset.valid = 'false';
-      window.scrollTo(0, 0);
     },
 
     showValid: function(input) {
@@ -87,42 +118,32 @@ function coriander(form, options) {
       input.parentNode.dataset.valid = 'true';
     },
 
-    testIfValid: function(inputs) {
+    validate: function(input) {
       var _this = this;
+      var dataset = input.dataset;
+      var match = input.value.match(input.dataset.regex);
 
-      return Array.prototype.slice
-        .call(inputs)
-        .map(function(input, index) {
-          _this.$allInputs.push(input);
-
-          var dataset = input.dataset;
-          var match = input.value.match(input.dataset.regex);
-
-          if (input.type !== 'radio') {
-            if (input.dataset.required) {
-              if ((dataset.regex && !match) || input.value === '') {
-                _this.showError(input);
-              } else {
-                _this.showValid(input, index);
-              }
-            }
-          } else if (input.dataset.required) {
-            if (form[input.name].value !== '') {
-              _this.showValid(input, index);
-            } else {
-              _this.showError(input);
-            }
-          }
-
-          if (input.parentNode.dataset.valid === 'false') {
-            return false;
+      if (input.type !== 'radio') {
+        if (input.dataset.required) {
+          if ((dataset.regex && !match) || input.value === '') {
+            _this.showError(input);
           } else {
-            return true;
+            _this.showValid(input);
           }
-        })
-        .every(function(input) {
-          return input === true;
-        });
+        }
+      } else if (input.dataset.required) {
+        if (form[input.name].value !== '') {
+          _this.showValid(input);
+        } else {
+          _this.showError(input);
+        }
+      }
+
+      if (input.parentNode.dataset.valid === 'false') {
+        return false;
+      } else {
+        return true;
+      }
     }
   };
 

@@ -164,8 +164,6 @@
         onSubmit: function(data) {
           var namesObj = {};
 
-          data.form.reset();
-
           var names = data.inputs.forEach(function(d) {
             if (d.type === 'radio') {
               namesObj[d.name] = d.nextElementSibling.textContent;
@@ -180,6 +178,8 @@
           });
 
           console.log(JSON.stringify(namesObj));
+
+          data.form.reset();
         }
       });
 
