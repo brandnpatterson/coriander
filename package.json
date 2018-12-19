@@ -1,13 +1,11 @@
 {
   "name": "coriander",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Form validation library built with JavaScript",
   "author": "Brandon Patterson",
   "license": "MIT",
   "main": "src/coriander.js",
   "scripts": {
-    "build": "npm run clean && rollup -c",
-    "dev": "npm run clean && rollup -c -w",
     "clean": "rimraf dist/*",
     "deploy": "surge",
     "eslint": "eslint index.js",
