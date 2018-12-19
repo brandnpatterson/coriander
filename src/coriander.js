@@ -1,6 +1,6 @@
 /**
  * Coriander
- * v1.4.2
+ * v1.4.3
  */
 
 var forEach = function(arr, callback) {
