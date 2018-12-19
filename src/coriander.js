@@ -1,11 +1,22 @@
 /**
  * Coriander
- * v1.4.7
+ * v1.4.8
  */
+
+function arrFrom(list) {
+  return Array.prototype.slice.call(list);
+}
+
+function forEach(arr, callback) {
+  for (var i = 0; i < arr.length; i++) {
+    callback(arr[i], i, arr);
+  }
+}
 
 function coriander(form, options) {
   var app = {
     $allInputs: [],
+    requiredNames: [],
 
     init: function() {
       this.cacheDOM();
@@ -23,23 +34,26 @@ function coriander(form, options) {
       var error = document.createElement('p');
 
       error.classList.add('coriander-error');
-      input.parentNode.appendChild(error);
+
+      if (!input.parentNode.querySelector('.coriander-error')) {
+        input.parentNode.appendChild(error);
+      }
     },
 
     setup: function() {
       var _this = this;
 
-      this.$inputs.forEach(function(input) {
+      forEach(this.$inputs, function(input) {
         _this.$allInputs.push(input);
         _this.newError(input);
       });
 
-      this.$radioInputs.forEach(function(input) {
+      forEach(this.$radioInputs, function(input) {
         _this.$allInputs.push(input);
         _this.newError(input);
       });
 
-      this.$textAreas.forEach(function(input) {
+      forEach(this.$textAreas, function(input) {
         _this.$allInputs.push(input);
         _this.newError(input);
       });
@@ -63,10 +77,17 @@ function coriander(form, options) {
       e.preventDefault();
 
       var _this = this;
+      var names = {};
 
       var result = this.$allInputs
         .map(function(input) {
-          return _this.validate(input);
+          if (!names[input.name]) {
+            names[input.name] = input.name;
+
+            return _this.validate(input);
+          } else {
+            return true;
+          }
         })
         .every(function(group) {
           return group === true;
@@ -102,6 +123,8 @@ function coriander(form, options) {
       }
 
       input.parentNode.dataset.valid = 'false';
+
+      return false;
     },
 
     showValid: function(input) {
@@ -112,6 +135,8 @@ function coriander(form, options) {
       }
 
       input.parentNode.dataset.valid = 'true';
+
+      return true;
     },
 
     validate: function(input) {
@@ -119,23 +144,35 @@ function coriander(form, options) {
       var dataset = input.dataset;
       var match = input.value.match(input.dataset.regex);
 
-      if (input.type !== 'radio') {
-        if (input.dataset.required) {
-          if ((dataset.regex && !match) || input.value === '') {
-            _this.showError(input);
+      if (input.type === 'radio') {
+        var required;
+
+        forEach(form[input.name], function(input) {
+          if (input.dataset.required) {
+            required = input.name;
+          }
+        });
+
+        if (input.name === required) {
+          var inputValue = document.querySelector(
+            'input[name=' + [input.name] + ']:checked'
+          );
+
+          if (!inputValue) {
+            return _this.showError(input);
           } else {
-            _this.showValid(input);
+            return _this.showValid(input);
           }
         }
       } else if (input.dataset.required) {
-        if (form[input.name].value !== '') {
-          _this.showValid(input);
-        } else {
-          _this.showError(input);
+        if (input.dataset.required) {
+          if ((dataset.regex && !match) || input.value === '') {
+            return _this.showError(input);
+          } else {
+            return _this.showValid(input);
+          }
         }
-      }
-
-      if (input.parentNode.dataset.valid === 'false') {
+      } else if (input.parentNode.dataset.valid === 'false') {
         return false;
       } else {
         return true;
