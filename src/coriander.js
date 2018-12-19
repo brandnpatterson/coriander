@@ -1,6 +1,6 @@
 /**
  * Coriander
- * v1.4.0
+ * v1.4.1
  */
 
 var forEach = function(arr, callback) {
@@ -169,8 +169,8 @@ function coriander(form, options) {
   app.init();
 }
 
-if (typeof module !== 'undefined' && typeof window === 'undefined') {
+if (typeof module !== 'undefined') {
   module.exports = coriander;
-} else if (typeof window !== 'undefined') {
+} else {
   window.coriander = coriander;
 }
