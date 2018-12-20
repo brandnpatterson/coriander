@@ -4,7 +4,7 @@ Form validation library built with JavaScript
 
 ## Version
 
-1.4.9
+1.5.0
 
 ## Installation
 
@@ -14,7 +14,7 @@ Form validation library built with JavaScript
 
 ### unpkg
 
-`<script src="https://unpkg.com/coriander@1.4.9/src/coriander.js"></script>`
+`<script src="https://unpkg.com/coriander@1.5.0/src/coriander.js"></script>`
 
 ## Getting Started
 
@@ -81,6 +81,7 @@ coriander(form, {
 - [Gulp](https://gulpjs.com/) - Task runner
 - [BrowserSync](https://browsersync.io/) - Local server
 - [ESLint](https://eslint.org/) - Linter for JS files
+- [Jasmine](https://jasmine.github.io/) - Behavior Driven Testing Library
 
 ## Authors
 
