@@ -1,6 +1,6 @@
 {
   "name": "coriander",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "Form validation library built with JavaScript",
   "author": "Brandon Patterson",
   "license": "MIT",
@@ -9,7 +9,8 @@
     "clean": "rimraf dist/*",
     "deploy": "surge",
     "eslint": "eslint index.js",
-    "start": "gulp"
+    "start": "gulp",
+    "test": "gulp test"
   },
   "devDependencies": {
     "browser-sync": "^2.24.1",

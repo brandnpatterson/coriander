@@ -1,11 +1,7 @@
 /**
  * Coriander
- * v1.4.8
+ * v1.4.9
  */
-
-function arrFrom(list) {
-  return Array.prototype.slice.call(list);
-}
 
 function forEach(arr, callback) {
   for (var i = 0; i < arr.length; i++) {
@@ -64,7 +60,7 @@ function coriander(form, options) {
 
       form.addEventListener('submit', this.onValidate.bind(this));
 
-      if (options.onChange) {
+      if (options && options.onChange) {
         this.$allInputs.forEach(function(input) {
           input.addEventListener('change', function() {
             _this.validate(input);
@@ -75,6 +71,10 @@ function coriander(form, options) {
 
     onValidate: function(e) {
       e.preventDefault();
+
+      if (this.$allInputs.length === 0) {
+        return false;
+      }
 
       var _this = this;
       var names = {};
@@ -94,7 +94,9 @@ function coriander(form, options) {
         });
 
       if (result) {
-        if (options.onSubmit) {
+        if (options === false) {
+          form.submit();
+        } else if (options && options.onSubmit) {
           options.onSubmit({
             form: form,
             inputs: this.$allInputs.filter(function(input) {
@@ -105,12 +107,12 @@ function coriander(form, options) {
               }
             })
           });
-        } else {
-          form.submit();
         }
       } else {
         window.scrollTo(0, 0);
       }
+
+      return result;
     },
 
     showError: function(input) {
@@ -140,6 +142,10 @@ function coriander(form, options) {
     },
 
     validate: function(input) {
+      if (!input) {
+        return false;
+      }
+
       var _this = this;
       var dataset = input.dataset;
       var match = input.value.match(input.dataset.regex);
@@ -181,6 +187,8 @@ function coriander(form, options) {
   };
 
   app.init();
+
+  return app;
 }
 
 if (typeof module !== 'undefined') {

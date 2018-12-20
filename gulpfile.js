@@ -20,3 +20,13 @@ gulp.task('default', ['eslint'], () => {
   gulp.watch('./src/**/*.js', ['eslint', browserSync.reload]);
   gulp.watch('./index.html', browserSync.reload);
 });
+
+gulp.task('test', ['eslint'], () => {
+  browserSync.init({
+    server: '',
+    startPath: '/test/index.html'
+  });
+
+  gulp.watch('./test/**/*.js', ['eslint', browserSync.reload]);
+  gulp.watch('./test/index.html', browserSync.reload);
+});
