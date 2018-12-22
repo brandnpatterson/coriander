@@ -40,7 +40,7 @@ Form validation library built with JavaScript
 />
 ```
 
-## Instantiate coriander and pass a form element as an argument
+## Call coriander and pass a form element as an argument
 
 ```
 coriander(form);
