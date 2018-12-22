@@ -1,6 +1,6 @@
 /**
  * Coriander
- * v1.5.1
+ * v1.5.2
  */
 
 function arrFrom(arr) {
@@ -18,7 +18,7 @@ function forEach(arr, callback) {
  * @param {Element} form
  * @param {Object} options
  *    @property  {Boolean} onChange  - validate selected input on change - default: undefined
- *    @property {Function} onSubmit - handle what to do when validation passes - default: form.submit()
+ *    @property {Function} onSubmit - handle when validation passes - default: form.submit()
  * @returns {Boolean}
  */
 function coriander(form, options) {
