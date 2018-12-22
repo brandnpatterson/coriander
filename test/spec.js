@@ -27,10 +27,10 @@ describe('Coriander Integration Tests', () => {
 
     var app = coriander(form);
 
-    expect(app.onValidate(e)).toBe(false);
+    expect(app.onSubmit(e)).toBe(false);
   });
 
-  it('should validate if all input values do not equal an empty string', () => {
+  it('should validate only if no input values equal an empty string', () => {
     input.value = 'test';
     input2.value = 'test2';
 
@@ -39,6 +39,6 @@ describe('Coriander Integration Tests', () => {
 
     var app = coriander(form);
 
-    expect(app.onValidate(e)).toBe(true);
+    expect(app.onSubmit(e)).toBe(true);
   });
 });

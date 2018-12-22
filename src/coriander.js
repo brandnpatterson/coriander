@@ -1,7 +1,11 @@
 /**
  * Coriander
- * v1.5.0
+ * v1.5.1
  */
+
+function arrFrom(arr) {
+  return Array.prototype.slice.call(arr);
+}
 
 function forEach(arr, callback) {
   for (var i = 0; i < arr.length; i++) {
@@ -9,59 +13,32 @@ function forEach(arr, callback) {
   }
 }
 
+/**
+ * Form validation library
+ * @param {Element} form
+ * @param {Object} options
+ *    @property  {Boolean} onChange  - validate selected input on change - default: undefined
+ *    @property {Function} onSubmit - handle what to do when validation passes - default: form.submit()
+ * @returns {Boolean}
+ */
 function coriander(form, options) {
   var app = {
-    $allInputs: [],
-    requiredNames: [],
-
     init: function() {
       this.cacheDOM();
-      this.setup();
       this.bindEvents();
     },
 
     cacheDOM: function() {
-      this.$inputs = form.querySelectorAll('input:not([type="radio"])');
-      this.$radioInputs = form.querySelectorAll('input[type="radio"]');
-      this.$textAreas = form.querySelectorAll('textarea');
-    },
-
-    newError: function(input) {
-      var error = document.createElement('p');
-
-      error.classList.add('coriander-error');
-
-      if (!input.parentNode.querySelector('.coriander-error')) {
-        input.parentNode.appendChild(error);
-      }
-    },
-
-    setup: function() {
-      var _this = this;
-
-      forEach(this.$inputs, function(input) {
-        _this.$allInputs.push(input);
-        _this.newError(input);
-      });
-
-      forEach(this.$radioInputs, function(input) {
-        _this.$allInputs.push(input);
-        _this.newError(input);
-      });
-
-      forEach(this.$textAreas, function(input) {
-        _this.$allInputs.push(input);
-        _this.newError(input);
-      });
+      this.$inputs = arrFrom(form.querySelectorAll('input, textarea'));
     },
 
     bindEvents: function() {
       var _this = this;
 
-      form.addEventListener('submit', this.onValidate.bind(this));
+      form.addEventListener('submit', this.onSubmit.bind(this));
 
       if (options && options.onChange) {
-        this.$allInputs.forEach(function(input) {
+        this.$inputs.forEach(function(input) {
           input.addEventListener('change', function() {
             _this.validate(input);
           });
@@ -69,17 +46,22 @@ function coriander(form, options) {
       }
     },
 
-    onValidate: function(e) {
+    /**
+     * Test if all inputs have been validated
+     * @param {Event} e
+     * @returns {Boolean}
+     */
+    onSubmit: function(e) {
       e.preventDefault();
 
-      if (this.$allInputs.length === 0) {
+      if (this.$inputs.length === 0) {
         return false;
       }
 
       var _this = this;
       var names = {};
 
-      var result = this.$allInputs
+      var result = this.$inputs
         .map(function(input) {
           if (!names[input.name]) {
             names[input.name] = input.name;
@@ -99,7 +81,7 @@ function coriander(form, options) {
         } else if (options && options.onSubmit) {
           options.onSubmit({
             form: form,
-            inputs: this.$allInputs.filter(function(input) {
+            inputs: this.$inputs.filter(function(input) {
               if (input.type === 'radio' && input.checked === true) {
                 return input;
               } else if (input.type !== 'radio') {
@@ -115,78 +97,87 @@ function coriander(form, options) {
       return result;
     },
 
-    showError: function(input) {
+    errorShow: function(input) {
       var error = input.parentNode.querySelector('.coriander-error');
+
+      if (!input.parentNode.querySelector('.coriander-error')) {
+        var error = document.createElement('p');
+
+        error.classList.add('coriander-error');
+        input.parentNode.appendChild(error);
+      }
 
       if (input.dataset.error) {
         error.textContent = input.dataset.error;
-      } else {
+      } else if (error) {
         error.textContent = 'This value is required';
       }
-
-      input.parentNode.dataset.valid = 'false';
 
       return false;
     },
 
-    showValid: function(input) {
+    errorRemove: function(input) {
       var error = input.parentNode.querySelector('.coriander-error');
 
       if (error) {
-        error.textContent = '';
+        error.remove();
       }
-
-      input.parentNode.dataset.valid = 'true';
 
       return true;
     },
 
+    /**
+     * Test single input against data-required or data-regex attribute
+     * @param {Element} input
+     * @returns {Boolean}
+     */
     validate: function(input) {
+      var _this = this;
+
       if (!input) {
         return false;
       }
 
-      var _this = this;
       var dataset = input.dataset;
       var match = input.value.match(input.dataset.regex);
 
       if (input.type === 'radio') {
-        var required;
+        var requiredByName;
 
         forEach(form[input.name], function(input) {
           if (input.dataset.required) {
-            required = input.name;
+            requiredByName = input.name;
           }
         });
 
-        if (input.name === required) {
+        if (input.name === requiredByName) {
           var inputValue = document.querySelector(
             'input[name=' + [input.name] + ']:checked'
           );
 
           if (!inputValue) {
-            return _this.showError(input);
+            return _this.errorShow(input);
           } else {
-            return _this.showValid(input);
+            return _this.errorRemove(input);
           }
         }
       } else if (input.dataset.required) {
-        if (input.dataset.required) {
-          if ((dataset.regex && !match) || input.value === '') {
-            return _this.showError(input);
-          } else {
-            return _this.showValid(input);
-          }
+        if ((dataset.regex && !match) || input.value === '') {
+          return _this.errorShow(input);
+        } else {
+          return _this.errorRemove(input);
         }
-      } else if (input.parentNode.dataset.valid === 'false') {
-        return false;
       } else {
         return true;
       }
     }
   };
 
-  app.init();
+  if (form.tagName !== 'FORM') {
+    console.error('element passed to Coriander must be a form');
+  } else {
+    app.init();
+  }
 
   return app;
 }

@@ -4,7 +4,7 @@ Form validation library built with JavaScript
 
 ## Version
 
-1.5.0
+1.5.1
 
 ## Installation
 
@@ -14,7 +14,7 @@ Form validation library built with JavaScript
 
 ### unpkg
 
-`<script src="https://unpkg.com/coriander@1.5.0/src/coriander.js"></script>`
+`<script src="https://unpkg.com/coriander@1.5.1/src/coriander.js"></script>`
 
 ## Getting Started
 
@@ -40,10 +40,10 @@ Form validation library built with JavaScript
 />
 ```
 
-## Call coriander method
+## Instantiate coriander and pass a form element as an argument
 
 ```
-form.coriander();
+coriander(form);
 ```
 
 ### Method Options
