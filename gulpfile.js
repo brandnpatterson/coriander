@@ -24,9 +24,9 @@ gulp.task('default', ['eslint'], () => {
 gulp.task('test', ['eslint'], () => {
   browserSync.init({
     server: '',
-    startPath: '/test/index.html'
+    startPath: '/test/SpecRunner.html'
   });
 
   gulp.watch('./test/**/*.js', ['eslint', browserSync.reload]);
-  gulp.watch('./test/index.html', browserSync.reload);
+  gulp.watch('./test/SpecRunner.html', browserSync.reload);
 });
