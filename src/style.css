@@ -146,3 +146,12 @@ body {
     font-size: 14px;
   }
 }
+
+.hidden {
+  opacity: 0;
+}
+
+.github-buttons {
+  min-height: 32px;
+  transition: opacity 0.25s;
+}

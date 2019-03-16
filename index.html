@@ -20,7 +20,7 @@
           <h2 class="subtitle">
             Form validation library built with JavaScript 🍂
           </h2>
-          <div class="github-buttons">
+          <div class="github-buttons hidden">
             <a
               class="github-button"
               href="https://github.com/brandnpatterson"
@@ -154,6 +154,11 @@
     <script src="src/coriander.js"></script>
     <script type="text/javascript">
       var $form = document.querySelector('.form');
+      var $githubButtons = document.querySelector('.github-buttons');
+
+      setTimeout(function() {
+        $githubButtons.classList.remove('hidden');
+      }, 100);
 
       coriander($form, {
         onChange: true,
